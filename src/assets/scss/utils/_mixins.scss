@@ -22,3 +22,14 @@
     @content;
   }
 }
+
+
+@mixin visible-xs {
+	@media #{$mq-xsmall} { display: block; }
+  @media #{$mq-small} { display: none; }
+}
+
+@mixin hidden-xs {
+  @media #{$mq-xsmall} { display: none; }
+  @media #{$mq-small} { display: block; }  
+}
