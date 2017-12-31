@@ -4,17 +4,35 @@ $calendarHeightDesktop: 350px;
 $calendarWidthMobile: 100%;
 
 $datepickerWidthDesktop: 370px;
-$datepickerHeight: 350px;
+$datepickerHeightMobile: 350px;
 
 $eventBlockWidthDesktop: 230px;
 $eventBlockHeightMobile: 170px;
 
+$calendarBorderRadius: 15px;
 
-.desktop__calendar {
-
+.content {
+	display: flex;
+	justify-content: center;
+	width: 100%;
 }
 
-.mobile__calendar {
+.calendar {
+	display: inline-flex;
+	@include hidden-xs(inline-flex);
+	height: $calendarHeightDesktop;
+	border-radius: $calendarBorderRadius;
+	overflow: hidden;
 
+	&__event {
+		height: 100%;
+		width: $eventBlockWidthDesktop;
+		background-color: $bgBoxLeft; 
+	}
+
+	&__datepicker {
+		height: 100%;
+		width: $datepickerWidthDesktop;
+		background-color: white; 
+	}
 }
-
