@@ -4,9 +4,13 @@ var PNG = require('pngjs').PNG;
 var fs = require('fs');
 var path = require('path');
 var sys = require('util');
-var exec = require('child_process').exec;
-exec('ng serve --port 8090');
-var url = 'http://localhost:8090';
+// TODO 
+// O exec nao espera o serve terminar provavelmente e tenta executar a tela sem 
+// o servidor local estar rodando
+
+// var exec = require('child_process').exec;
+// exec('ng serve --port 8090');
+var url = 'http://localhost:4200';
 
 describe('Tryout#1 - ', function() {
 
