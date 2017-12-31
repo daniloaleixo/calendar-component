@@ -1,0 +1,71 @@
+
+$defaultFont: 'Roboto', sans-serif !default;
+$defaultFontSize: 12px !default;
+
+
+// Default typography
+.default-font {
+    font-size: $defaultFontSize;
+    font-family: $defaultFont;
+}
+
+body {
+	@extend .default-font;
+}
+
+
+// Typography
+.current-day {
+	font-family: $defaultFont;
+	font-weight: bold;
+	font-size: 100px;
+	text-align: center;
+	letter-spacing: -2.2px;
+}
+
+
+.current-day-2 {
+	font-family: $defaultFont;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	letter-spacing: -0.4px;
+}
+
+.month-year {
+	@extend .default-font;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: -0.3px;
+}
+
+.day--week {
+	@extend .default-font;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: -0.3px;
+}
+
+.current-events {
+	@extend .default-font;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: -0.3px;
+}
+
+.creat-on-event {
+	@extend .default-font;
+	font-weight: 400;
+	font-style: italic;
+	text-align: center;
+}
+
+.calendar--day {
+	@extend .default-font;
+	text-align: center;
+	letter-spacing: -0.3px;
+}
+
+
+
+
