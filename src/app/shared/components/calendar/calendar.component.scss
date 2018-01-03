@@ -9,7 +9,7 @@ $datepickerHeightMobile: 350px;
 $eventBlockWidthDesktop: 230px;
 $eventBlockHeightMobile: 170px;
 
-$calendarBorderRadius: 15px;
+$calendarBorderRadius: 10px;
 
 .content {
 	display: flex;
@@ -18,21 +18,79 @@ $calendarBorderRadius: 15px;
 }
 
 .calendar {
-	display: inline-flex;
-	@include hidden-xs(inline-flex);
-	height: $calendarHeightDesktop;
 	border-radius: $calendarBorderRadius;
 	overflow: hidden;
+	
+	@include bp-xsmall {
+		display: grid;
+		width: 100%;
+	}
+	@include bp-small {
+		display: inline-flex;
+		width: auto;
+		height: $calendarHeightDesktop;
+	}
+}
 
-	&__event {
+
+.event {
+	background-color: $bgBoxLeft;
+	color: $whiteColor;
+
+	// display: flex;
+	// justify-content: center;
+
+	@include bp-xsmall {
+		height: $eventBlockHeightMobile;
+		// width: 100%;
+	}
+	@include bp-small {
 		height: 100%;
 		width: $eventBlockWidthDesktop;
-		background-color: $bgBoxLeft; 
 	}
 
-	&__datepicker {
+	&__current-day {
+		@extend .current-day;
+		@extend .align-vertical-center;
+
+	    &--number {}
+
+		&--week {
+			@extend .current-day-2;
+			text-transform: uppercase;
+		}
+	}
+
+	&__current-events {
+		@extend .align-vertical-center;
+
+		&__list {
+			@extend .current-events;
+			text-transform: capitalize;
+			text-align: left;
+
+			ul {
+				margin-left: -20px;
+				font-weight: 400;
+			}
+		}
+
+		&__create {
+			@extend .creat-on-event;
+			text-align: left;
+		}
+	}
+}
+
+.datepicker {
+	background-color: white;
+
+	@include bp-xsmall {
+		height: $datepickerHeightMobile;
+		width: 100%;
+	}
+	@include bp-small {
 		height: 100%;
 		width: $datepickerWidthDesktop;
-		background-color: white; 
 	}
 }
