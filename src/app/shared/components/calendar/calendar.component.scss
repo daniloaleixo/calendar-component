@@ -37,9 +37,6 @@ $calendarBorderRadius: 10px;
 	background-color: $bgBoxLeft;
 	color: $whiteColor;
 
-	// display: flex;
-	// justify-content: center;
-
 	@include bp-xsmall {
 		height: $eventBlockHeightMobile;
 		// width: 100%;
@@ -64,20 +61,48 @@ $calendarBorderRadius: 10px;
 	&__current-events {
 		@extend .align-vertical-center;
 
-		&__list {
-			@extend .current-events;
-			text-transform: capitalize;
-			text-align: left;
 
-			ul {
-				margin-left: -20px;
-				font-weight: 400;
-			}
-		}
+	}
+}
 
-		&__create {
-			@extend .creat-on-event;
-			text-align: left;
+.event-list {
+	@extend .current-events;
+	text-transform: capitalize;
+	text-align: left;
+
+	ul {
+		margin-left: -20px;
+		font-weight: 400;
+	}
+}
+
+.create-event {
+	@extend .creat-on-event;
+	text-align: left;
+	padding: 3px 0;
+	border-bottom: 1px solid white;
+	margin-right: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	&__title {
+		flex-grow: 1;
+		padding: 10px 0;
+	}
+
+	&__plus-icon {
+		width: 25px;
+		height: 25px;
+		border: 1px solid $whiteColor;
+		border-radius: 100%;
+		@extend .align-horizontal-center;
+
+		span {
+			@extend .align-vertical-center;
+			text-align: center;
+			font-style: normal;
+			width: 100%;
 		}
 	}
 }
