@@ -67,6 +67,10 @@ $calendarBorderRadius: 10px;
 	}
 
 	&__current-events {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
 		@include bp-xsmall {
 			height: 100%;
 			margin-left: 0;
@@ -92,26 +96,56 @@ $calendarBorderRadius: 10px;
 }
 
 .create-event {
-	@extend .creat-on-event;
-	text-align: left;
 	padding: 3px 0;
 	border-bottom: 1px solid white;
 	margin-right: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	margin-top: 2.5rem;
+	margin-bottom: 1.5rem;
 
-
-	&__title {
+	&__input {
+		@extend .creat-on-event;
 		flex-grow: 1;
 		padding: 10px 0;
+		background-color: transparent;
+		border-width: 0;
+		color: $whiteColor;
+		text-align: left;
+
+		// Remove border on focus
+		&:focus {
+			outline: 0;
+		}
+
+		// Change placeholder font color
+		&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+		    color:    $whiteColor;
+		}
+		&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		   color:    $whiteColor;
+		   opacity:  1;
+		}
+		&::-moz-placeholder { /* Mozilla Firefox 19+ */
+		   color:    $whiteColor;
+		   opacity:  1;
+		}
+		&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		   color:    $whiteColor;
+		}
+		&::-ms-input-placeholder { /* Microsoft Edge */
+		   color:    $whiteColor;
+		}
+		&::placeholder { /* Most modern browsers support this now. */
+		   color:    $whiteColor;
+		}
 	}
 
+	// + Icon to include event
 	&__plus-icon {
 		@extend .align-horizontal-center;
-		width: 25px;
-		height: 25px;
+		width: 20px;
+		height: 20px;
 		border: 1px solid $whiteColor;
 		@include bp-xsmall {
 			border-radius: 100%;
