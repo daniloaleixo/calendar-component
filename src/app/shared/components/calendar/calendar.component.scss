@@ -48,7 +48,15 @@ $calendarBorderRadius: 10px;
 
 	&__current-day {
 		@extend .current-day;
-		@extend .align-vertical-center;
+
+		@include bp-xsmall {
+			height: 100%;
+			margin-top: 0.5rem;
+		}
+		@include bp-small {
+			height: auto;
+			margin-top: 2rem;
+		}
 
 	    &--number {}
 
@@ -59,9 +67,14 @@ $calendarBorderRadius: 10px;
 	}
 
 	&__current-events {
-		@extend .align-vertical-center;
-
-
+		@include bp-xsmall {
+			height: 100%;
+			margin-left: 0;
+		}
+		@include bp-small {
+			height: auto;
+			margin-left: 1rem;
+		}
 	}
 }
 
@@ -69,6 +82,8 @@ $calendarBorderRadius: 10px;
 	@extend .current-events;
 	text-transform: capitalize;
 	text-align: left;
+	margin-top: 1.5rem;
+
 
 	ul {
 		margin-left: -20px;
@@ -85,6 +100,8 @@ $calendarBorderRadius: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	margin-top: 2.5rem;
+
 
 	&__title {
 		flex-grow: 1;
@@ -92,11 +109,16 @@ $calendarBorderRadius: 10px;
 	}
 
 	&__plus-icon {
+		@extend .align-horizontal-center;
 		width: 25px;
 		height: 25px;
 		border: 1px solid $whiteColor;
-		border-radius: 100%;
-		@extend .align-horizontal-center;
+		@include bp-xsmall {
+			border-radius: 100%;
+		}
+		@include bp-small {
+			border-radius: 20%;
+		}
 
 		span {
 			@extend .align-vertical-center;
