@@ -35,9 +35,37 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Datepicker -->
 		<div class="datepicker">
-			datepicker
-		</div>
+
+			<!-- Actual month -->
+			<div class="datepicker__actual-month">
+				<div class="datepicker__actual-month--vertical-center">
+					<span><</span> <!-- Previous -->
+					<span class="datepicker__actual-month--text">December/17</span>
+					<span>></span> <!-- Next -->
+				</div>
+			</div>
+
+			<!-- Divider -->
+			<hr class="datepicker__divider">
+
+			<table class="month-view">
+				<!-- Days of the week -->
+				<tr class="month-view__days-of-the-week">
+					<th *ngFor="let day of daysOfTheWeek">
+						{{ day }}
+					</th>
+				</tr>
+
+				<!-- Days -->
+				<tr class="month-view__days-of-the-month" *ngFor="let week of month">
+					<td *ngFor="let day of week">
+					{{ day.date.getDate() }}
+					</td>
+				</tr>
+			</table>
 	</div>
 </div>
 

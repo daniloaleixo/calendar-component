@@ -11,6 +11,10 @@ $eventBlockHeightMobile: 170px;
 
 $calendarBorderRadius: 10px;
 
+$calendarHeaderHeight: 15%;
+
+$defaultMatginBottom: 1.5rem;
+
 .content {
 	display: flex;
 	justify-content: center;
@@ -102,7 +106,7 @@ $calendarBorderRadius: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	margin-bottom: 1.5rem;
+	margin-bottom: $defaultMatginBottom;
 
 	&__input {
 		@extend .creat-on-event;
@@ -165,6 +169,7 @@ $calendarBorderRadius: 10px;
 
 .datepicker {
 	background-color: white;
+	@include padding-lateral(0.5rem);
 
 	@include bp-xsmall {
 		height: $datepickerHeightMobile;
@@ -174,4 +179,44 @@ $calendarBorderRadius: 10px;
 		height: 100%;
 		width: $datepickerWidthDesktop;
 	}
+
+	&__actual-month {
+		@extend .month-year;
+		height: $calendarHeaderHeight;
+		color: $mediumGray;
+		// padding: 20px 0;
+		display: flex;
+		justify-content: flex-end;
+		@include margin-lateral(1rem);
+
+		&--text {
+			margin: 0 5px;
+		}
+
+		&--vertical-center {
+			margin: auto 0;
+		}
+	}
+
+	&__divider {
+		margin: 0 1rem;
+	}
+
+}
+
+.month-view {
+	width: 100%;
+	height: calc(100% - #{$calendarHeaderHeight});
+	padding-bottom: $defaultMatginBottom;
+
+	&__days-of-the-week {
+		@extend .day--week;
+		// @extend .align-space-between;
+	}
+
+	&__days-of-the-month {
+		@extend .calendar--day;
+		// @extend .align-space-between;
+	}
+	
 }

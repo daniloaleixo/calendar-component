@@ -33,3 +33,18 @@
   @media #{$mq-xsmall} { display: none; }
   @media #{$mq-small} { display: $display-type; }  
 }
+
+
+// 
+// Margin and padding mxiins
+// 
+
+@mixin padding-lateral($size) {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+@mixin margin-lateral($size) {
+  margin-left: $size;
+  margin-right: $size;
+}
