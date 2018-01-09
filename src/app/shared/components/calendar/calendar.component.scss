@@ -184,7 +184,6 @@ $defaultMatginBottom: 1.5rem;
 		@extend .month-year;
 		height: $calendarHeaderHeight;
 		color: $mediumGray;
-		// padding: 20px 0;
 		display: flex;
 		justify-content: flex-end;
 		@include margin-lateral(1rem);
@@ -211,12 +210,14 @@ $defaultMatginBottom: 1.5rem;
 
 	&__days-of-the-week {
 		@extend .day--week;
-		// @extend .align-space-between;
 	}
 
 	&__days-of-the-month {
 		@extend .calendar--day;
-		// @extend .align-space-between;
+
+		&--offset {
+			color: $mediumGray;
+		}
 	}
 	
 }

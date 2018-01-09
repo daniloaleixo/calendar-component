@@ -61,7 +61,8 @@
 
 				<!-- Days -->
 				<tr class="month-view__days-of-the-month" *ngFor="let week of month">
-					<td *ngFor="let day of week">
+					<td *ngFor="let day of week" 
+					[ngClass]="{'month-view__days-of-the-month--offset': day.offset}">
 					{{ day.date.getDate() }}
 					</td>
 				</tr>
