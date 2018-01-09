@@ -205,6 +205,7 @@ $defaultMatginBottom: 1.5rem;
 
 .month-view {
 	width: 100%;
+	table-layout: fixed;
 	height: calc(100% - #{$calendarHeaderHeight});
 	padding-bottom: $defaultMatginBottom;
 
@@ -220,4 +221,10 @@ $defaultMatginBottom: 1.5rem;
 		}
 	}
 	
+}
+
+.bla {
+	border-radius: 100%;
+    background-color: $bgBoxLeft;
+    opacity: 0.5;
 }

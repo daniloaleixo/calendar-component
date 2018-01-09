@@ -9,10 +9,10 @@
 
 				<!-- Day -->
 				<div class="event__current-day--number">
-					20
+					{{ selectedDay?.date.getDate() }} 
 				</div>
 				<div class="event__current-day--week">
-					wednesday
+					{{ daysOfTheWeekFull[selectedDay?.date.getDay()] }}
 				</div>
 			</div>
 
@@ -43,7 +43,10 @@
 			<div class="datepicker__actual-month">
 				<div class="datepicker__actual-month--vertical-center">
 					<span><</span> <!-- Previous -->
-					<span class="datepicker__actual-month--text">December/17</span>
+					<span class="datepicker__actual-month--text">
+						{{ allMonths[selectedDay?.date.getMonth()] }} 
+						/ 
+						{{ selectedDay?.date.getFullYear().toString().substring(2,4) }}</span>
 					<span>></span> <!-- Next -->
 				</div>
 			</div>
@@ -61,9 +64,11 @@
 
 				<!-- Days -->
 				<tr class="month-view__days-of-the-month" *ngFor="let week of month">
-					<td *ngFor="let day of week" 
-					[ngClass]="{'month-view__days-of-the-month--offset': day.offset}">
-					{{ day.date.getDate() }}
+					<td class="bla" *ngFor="let day of week" 
+					[ngClass]="{'month-view__days-of-the-month--offset': day.offset, 'bla': isSelectedDay(day)}">
+						<div>
+							{{ day.date.getDate() }}
+						</div>
 					</td>
 				</tr>
 			</table>

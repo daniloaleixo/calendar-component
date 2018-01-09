@@ -14,16 +14,44 @@ import { ICalendarDay } from '../../models/calendar.model';
 })
 export class CalendarComponent implements OnInit {
 
-	public today: Date;
-	public daysOfTheWeek: string[];
-	public month: Array<ICalendarDay[]>; 
+	public daysOfTheWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+	public daysOfTheWeekFull: string[] = ['Sunday', 'Monday', 
+									'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	public allMonths: string[] = ['January',
+								'February',
+								'March',
+								'April',
+								'May',
+								'June',
+								'July',
+								'August',
+								'September',
+								'October',
+								'November',
+								'December']
+
+	public month: Array<ICalendarDay[]>;
+	public selectedDay: ICalendarDay; 
 
   	constructor(private calendarService: CalendarService) {}
 
   	ngOnInit() {
-  		this.today = new Date(2017, 11, 18); // Dia padrão requisitado
-  		this.daysOfTheWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-  		this.month = this.calendarService.mountMonthInformation(this.today);
+  		// Start selected date
+  		const startDate: Date = new Date(2017, 11, 18)
+  		
+  		this.month = this.calendarService.mountMonthInformation(startDate);
+  		this.changeSelectedDay(startDate);
+
+  	}
+
+  	public changeSelectedDay(daySelected: Date): void {
+  		this.selectedDay = this.calendarService.flattenArrayOfArrays(this.month)
+  							.find((day: ICalendarDay) => daySelected.getTime() == day.date.getTime());
+  	}
+
+  	public isSelectedDay(day: ICalendarDay): boolean {
+  		if(!this.selectedDay) return false;
+  		return day.date.getTime() == this.selectedDay.date.getTime();
   	}
 
 }

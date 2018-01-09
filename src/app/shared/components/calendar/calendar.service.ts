@@ -7,31 +7,36 @@ export class CalendarService {
 
     constructor() { }
 
+    public flattenArrayOfArrays(arrays: Array<ICalendarDay[]>): ICalendarDay[] {
+      return [].concat.apply([], arrays);
+    }
 
-  	public mountMonthInformation(today: Date): Array<ICalendarDay[]> {
-  		let result: Array<ICalendarDay[]> = [];
-  		let month: ICalendarDay[] = this.getDaysInMonth(today.getMonth(), today.getFullYear())
-  		.map((day: Date) => {
-  			return {
-  				date: day,
-  				offset: false
-  			};
-  		});
+    public mountMonthInformation(today: Date): Array<ICalendarDay[]> {
+      let result: Array<ICalendarDay[]> = [];
+      let month: ICalendarDay[] = this.getDaysInMonth(today.getMonth(), today.getFullYear())
+      .map((day: Date) => {
+        return {
+          date: day,
+          offset: false
+        };
+      });
 
-  		month = this.addOffsetDays(month);
+      month = this.addOffsetDays(month);
 
-  		// Divide the days in arrays of 7 so instead of a array(31) I would have 
-  		// [ array(7), array (7), ...]
-  		for(let i = 0; i < month.length; i+= 7) {
-  			result.push([]);
-  			for(let j = 0; j < 7; j++) {
-  				if(i + j < month.length)
-  					result[result.length - 1].push(month[i + j])
-  			}
-  		}
+      // Divide the days in arrays of 7 so instead of a array(31) I would have 
+      // [ array(7), array (7), ...]
+      for(let i = 0; i < month.length; i+= 7) {
+        result.push([]);
+        for(let j = 0; j < 7; j++) {
+          if(i + j < month.length)
+            result[result.length - 1].push(month[i + j])
+        }
+      }
 
-  		return result;
-  	}
+      return result;
+    }
+
+
 
    	private getDaysInMonth(month: number, year: number): Date[] {
          const date = new Date(year, month, 1);
