@@ -16,9 +16,9 @@ $calendarHeaderHeight: 15%;
 $defaultMatginBottom: 1.5rem;
 
 .content {
-	display: flex;
-	justify-content: center;
-	width: 100%;
+	position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 .calendar {
