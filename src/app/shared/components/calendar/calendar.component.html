@@ -64,10 +64,17 @@
 
 				<!-- Days -->
 				<tr class="month-view__days-of-the-month" *ngFor="let week of month">
-					<td class="bla" *ngFor="let day of week" 
-					[ngClass]="{'month-view__days-of-the-month--offset': day.offset, 'bla': isSelectedDay(day)}">
-						<div>
+					<td *ngFor="let day of week" 
+					(click)="changeSelectedDay(day)"
+					[ngClass]="{'month-view__days-of-the-month--offset': day.offset}">
+						<!-- Normal text -->
+						<div *ngIf="!isSelectedDay(day)">
 							{{ day.date.getDate() }}
+						</div>
+						<!-- Selected purple ball -->
+						<div class="bla" *ngIf="isSelectedDay(day)">
+							<span class="align-vertical-center">{{ day.date.getDate() }}</span>
+							<!-- {{ day.date.getDate() }} -->
 						</div>
 					</td>
 				</tr>

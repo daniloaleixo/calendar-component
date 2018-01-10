@@ -76,13 +76,17 @@ export class CalendarService {
   	}
 
 
-
+    // 
+    // Date helpers functions
+    // 
   	public previousDay(date: Date): Date {
   		return new Date(+date - 1000*60*60*24)
   	}
+
   	public followingDay(date: Date): Date {
   		return new Date(+date + 1000*60*60*24)
   	}
+
     public getFollowingMonth(date: Date): Date {
       let followingMonth: Date = new Date(date.getFullYear(), 
                                           date.getMonth() + 1,
@@ -97,6 +101,7 @@ export class CalendarService {
 
       return followingMonth;
     }
+
     public getPreviousMonth(date: Date): Date {
       let previousMonth: Date = new Date(date.getFullYear(), 
                                           date.getMonth() - 1,
