@@ -54,4 +54,15 @@ export class CalendarComponent implements OnInit {
   		return day.date.getTime() == this.selectedDay.date.getTime();
   	}
 
+  	public getFollowingMonth(): void {
+  		this.selectedDay.date = this.calendarService.getFollowingMonth(this.selectedDay.date);
+  		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date);
+
+  	}
+
+  	public getPreviousMonth(): void {
+  		this.selectedDay.date = this.calendarService.getPreviousMonth(this.selectedDay.date);
+  		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date);
+  	}
+
 }

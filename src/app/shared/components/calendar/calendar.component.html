@@ -42,12 +42,12 @@
 			<!-- Actual month -->
 			<div class="datepicker__actual-month">
 				<div class="datepicker__actual-month--vertical-center">
-					<span><</span> <!-- Previous -->
+					<span (click)="getPreviousMonth()"><</span> <!-- Previous -->
 					<span class="datepicker__actual-month--text">
 						{{ allMonths[selectedDay?.date.getMonth()] }} 
 						/ 
 						{{ selectedDay?.date.getFullYear().toString().substring(2,4) }}</span>
-					<span>></span> <!-- Next -->
+					<span (click)="getFollowingMonth()">></span> <!-- Next -->
 				</div>
 			</div>
 
