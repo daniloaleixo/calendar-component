@@ -219,6 +219,7 @@ $defaultMatginBottom: 1.5rem;
 		&--offset {
 			color: $mediumGray;
 		}
+
 	}
 	
 }
@@ -226,5 +227,9 @@ $defaultMatginBottom: 1.5rem;
 .bla {
 	border-radius: 100%;
     background-color: $bgBoxLeft;
-    opacity: 0.5;
+    color: white;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    transform: translate(0.33rem, -1.1rem);
 }
