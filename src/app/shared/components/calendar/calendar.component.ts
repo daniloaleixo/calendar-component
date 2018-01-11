@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarService } from './calendar.service'
-import { ICalendarDay } from '../../models/calendar.model';
+import { ICalendarDay, IAppointment, IAppointmentDB } from '../../models/calendar.model';
+
+import { ServerCommunicationService } from '../../services/server-communication.service';
+import { COMM_CONSTANTS } from '../../constants/communication.constant';
 
 // 
 // Decidi separar o componente calendar e coloca-lo dentro de um module shared, 
@@ -31,9 +34,12 @@ export class CalendarComponent implements OnInit {
 								'December']
 
 	public month: Array<ICalendarDay[]>;
-	public selectedDay: ICalendarDay; 
+	public selectedDay: ICalendarDay;
 
-  	constructor(private calendarService: CalendarService) {}
+	public appointments: IAppointment[] = [];
+
+  	constructor(private calendarService: CalendarService,
+  				private server: ServerCommunicationService) {}
 
   	ngOnInit() {
   		// Start selected date
@@ -45,6 +51,14 @@ export class CalendarComponent implements OnInit {
   		this.month = this.calendarService.mountMonthInformation(startDate.date);
   		this.changeSelectedDay(startDate);
 
+  		// Request from server
+  		this.server.getRequest(COMM_CONSTANTS.getAppointments)
+  		.subscribe((res: IAppointmentDB[]) => {
+  			// Get all the appointments for this user
+  			this.appointments = res.map((appt: IAppointmentDB) => {
+  				return { ...appt, date: new Date(appt.date) };
+  			})
+  		});
   	}
 
   	public changeSelectedDay(daySelected: ICalendarDay): void {
@@ -57,7 +71,7 @@ export class CalendarComponent implements OnInit {
   			else if((daySelected.date.getMonth() - 1) % 12 == this.selectedDay.date.getMonth())
   				this.getFollowingMonth();
   		}
-  		
+
   		this.selectedDay = this.calendarService.flattenArrayOfArrays(this.month)
   							.find((day: ICalendarDay) => daySelected.date.getTime() == day.date.getTime());
   	}
