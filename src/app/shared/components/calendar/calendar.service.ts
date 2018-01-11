@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ICalendarDay, IAppointment } from '../../models/calendar.model';
+import { UtilsService } from '../../services/utils.service';
 
 // Não fiz esse componente global porque ele vai servir de helper para o componente apenas
 @Injectable()
 export class CalendarService {
 
-    constructor() { }
+    constructor(private utils: UtilsService) { }
 
     public flattenArrayOfArrays(arrays: Array<ICalendarDay[]>): ICalendarDay[] {
       return [].concat.apply([], arrays);
@@ -40,12 +41,16 @@ export class CalendarService {
       return result;
     }
 
+    // Part of the workaround to "save" appointment to DB
+    public turnDateIntoDBDate(date: Date): string {
+      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    }
 
 
     // 
     // Helpers for the service
     // 
-   	private getDaysInMonth(month: number, year: number): Date[] {
+     private getDaysInMonth(month: number, year: number): Date[] {
          const date = new Date(year, month, 1);
          let days = [];
          while (date.getMonth() === month) {
@@ -53,14 +58,14 @@ export class CalendarService {
              date.setDate(date.getDate() + 1);
          }
          return days;
-  	}
+    }
 
     private insertAppointments(month: ICalendarDay[], appointments: IAppointment[]): ICalendarDay[] {
       appointments.map((appt: IAppointment) => {
         debugger
         // Push appointment to the right day
         const dayToInsert: ICalendarDay = month
-        .find((day: ICalendarDay) => this.compareDayMonthYear(day.date, appt.date));
+        .find((day: ICalendarDay) => this.utils.compareDayMonthYear(day.date, appt.date));
 
         debugger
 
@@ -70,83 +75,31 @@ export class CalendarService {
       return month;
     }
 
-  	// Vai adicionar os dias que faltam nas colunas de inicio e fim
-  	private addOffsetDays(month: ICalendarDay[]): ICalendarDay[] {
-  		const lastDay: ICalendarDay = month[month.length - 1];
+    // Vai adicionar os dias que faltam nas colunas de inicio e fim
+    private addOffsetDays(month: ICalendarDay[]): ICalendarDay[] {
+      const lastDay: ICalendarDay = month[month.length - 1];
 
-  		// Offset in the beggining 
-  		// While it's not sunday
-  		while(month[0].date.getDay() > 0) {
-  			let newDay: ICalendarDay = {
-  				offset: true,
-  				date: this.previousDay(month[0].date)
-  			}
-  			month = [newDay, ...month];
-  		}
+      // Offset in the beggining 
+      // While it's not sunday
+      while(month[0].date.getDay() > 0) {
+        let newDay: ICalendarDay = {
+          offset: true,
+          date: this.utils.previousDay(month[0].date)
+        }
+        month = [newDay, ...month];
+      }
 
-  		// Offset in the end
-  		// While it's not saturday
-  		while(month[month.length - 1].date.getDay() < 6) {
-  			let newDay: ICalendarDay = {
-  				offset: true,
-  				date: this.followingDay(month[month.length - 1].date)
-  			}
-  			month = [...month, newDay];
-  		}
+      // Offset in the end
+      // While it's not saturday
+      while(month[month.length - 1].date.getDay() < 6) {
+        let newDay: ICalendarDay = {
+          offset: true,
+          date: this.utils.followingDay(month[month.length - 1].date)
+        }
+        month = [...month, newDay];
+      }
 
-  		return month;
-  	}
-
-
-    // 
-    // Date helpers functions
-    // 
-  	public previousDay(date: Date): Date {
-  		return new Date(+date - 1000*60*60*24)
-  	}
-
-  	public followingDay(date: Date): Date {
-  		return new Date(+date + 1000*60*60*24)
-  	}
-
-    public getFollowingMonth(date: Date): Date {
-      let followingMonth: Date = new Date(date.getFullYear(), 
-                                          date.getMonth() + 1,
-                                          date.getDate());
-      // There's a chance of the following month does not have 31 days
-      // so we have to check if the month is + 2
-      if(followingMonth.getMonth() == date.getMonth() + 2)
-        followingMonth = this.getPreviousMonth(followingMonth);
-
-      if(followingMonth.getMonth() == date.getMonth())
-        throw "Nao consegui pegar o mês seguinte";
-
-      return followingMonth;
+      return month;
     }
 
-    public getPreviousMonth(date: Date): Date {
-      let previousMonth: Date = new Date(date.getFullYear(), 
-                                          date.getMonth() - 1,
-                                          date.getDate());
-      // There's a chance of the previous month does not have 31 days
-      // so we have to get the previous day
-      if(previousMonth.getMonth() == date.getMonth())
-        previousMonth = this.getPreviousMonth(previousMonth);
-
-      if(previousMonth.getMonth() == date.getMonth())
-        throw "Nao consegui pegar o mês anterior";
-
-      return previousMonth;
-    }
-
-    public turnDateIntoDBDate(date: Date): string {
-      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-    }
-
-
-    private compareDayMonthYear(date1: Date, date2: Date): boolean {
-      return date1.getDate() == date2.getDate() && 
-              date1.getMonth() == date2.getMonth() &&
-              date1.getFullYear() == date2.getFullYear();
-    }
 }

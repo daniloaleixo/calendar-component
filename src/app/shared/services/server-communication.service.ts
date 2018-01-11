@@ -36,6 +36,7 @@ export class ServerCommunicationService {
 
     // 
     // A little workaround to "save" the appointment
+    // THIS SHOULD BE IN BACKEND of course
     this.appointments.push(<IAppointmentDB>body);
 
     return Observable.of(this.appointments);

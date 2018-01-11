@@ -20,7 +20,7 @@ $defaultMatginBottom: 1.5rem;
     width: 100%;
     height: 100%;
 }
-
+// Whole component block
 .calendar {
 	border-radius: $calendarBorderRadius;
 	overflow: hidden;
@@ -36,7 +36,7 @@ $defaultMatginBottom: 1.5rem;
 	}
 }
 
-
+// Part that has the current events and the actual day
 .event {
 	background-color: $bgBoxLeft;
 	color: $whiteColor;
@@ -99,6 +99,7 @@ $defaultMatginBottom: 1.5rem;
 	}
 }
 
+// Create event input
 .create-event {
 	padding: 3px 0;
 	border-bottom: 1px solid white;
@@ -167,6 +168,8 @@ $defaultMatginBottom: 1.5rem;
 	}
 }
 
+
+// Calendar by itself, where you have all the days of the month and so 
 .datepicker {
 	background-color: white;
 	@include padding-lateral(0.5rem);
@@ -203,6 +206,7 @@ $defaultMatginBottom: 1.5rem;
 
 }
 
+// Table that contains all the days of the month
 .month-view {
 	width: 100%;
 	table-layout: fixed;
@@ -224,6 +228,8 @@ $defaultMatginBottom: 1.5rem;
 	
 }
 
+// requested class
+// I chose to leave it here, otherwise it would break my BEM architecture
 .calendar__day {
 	&--selected {
 		border-radius: 100%;
@@ -236,6 +242,8 @@ $defaultMatginBottom: 1.5rem;
 	}
 	
 }
+
+// Class that sinalizes when a day has an appointment
 .has-event {
 	width: 5px;
     height: 5px;

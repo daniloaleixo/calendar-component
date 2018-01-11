@@ -3,7 +3,8 @@ import { CalendarService } from './calendar.service'
 import { ICalendarDay, IAppointment, IAppointmentDB } from '../../models/calendar.model';
 
 import { ServerCommunicationService } from '../../services/server-communication.service';
-import { COMM_CONSTANTS } from '../../constants/communication.constant';
+import { UtilsService } from '../../services/utils.service';
+import { COMM_CONSTANTS, DAYS_WEEK, DAYS_WEEK_FULL, MONTHS } from '../../constants/barrel-constants';
 
 // 
 // Decidi separar o componente calendar e coloca-lo dentro de um module shared, 
@@ -17,32 +18,26 @@ import { COMM_CONSTANTS } from '../../constants/communication.constant';
 })
 export class CalendarComponent implements OnInit {
 
+	// Constants
+	public daysOfTheWeek: string[] = DAYS_WEEK;
+	public daysOfTheWeekFull: string[] = DAYS_WEEK_FULL;
+	public allMonths: string[] = MONTHS;
+
+	// Later we could implement a loading component
     public loadingState: boolean = false;
 
+    // Input that handles appointment creation
     public eventInput: string = '';
 
-	public daysOfTheWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-	public daysOfTheWeekFull: string[] = ['Sunday', 'Monday', 
-									'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-	public allMonths: string[] = ['January',
-								'February',
-								'March',
-								'April',
-								'May',
-								'June',
-								'July',
-								'August',
-								'September',
-								'October',
-								'November',
-								'December']
 
+    // Month that is showed in our calendar
 	public month: Array<ICalendarDay[]>;
 	public selectedDay: ICalendarDay;
-
 	public appointments: IAppointment[] = [];
 
+
   	constructor(private calendarService: CalendarService,
+  				private utils: UtilsService,
   				private server: ServerCommunicationService) {}
 
   	ngOnInit() {
@@ -63,8 +58,9 @@ export class CalendarComponent implements OnInit {
   			// Create the month object with all the appointments 
 	  		this.month = this.calendarService.mountMonthInformation(startDate.date, this.appointments);
 	  		this.changeSelectedDay(startDate);
-	  		this.loadingState = true;
-	  		console.log(this.month);
+
+	  		// Turns off loading 
+	  		this.loadingState = true; 
   		});
   	}
 
@@ -119,12 +115,12 @@ export class CalendarComponent implements OnInit {
 
 
   	public getFollowingMonth(): void {
-  		this.selectedDay.date = this.calendarService.getFollowingMonth(this.selectedDay.date);
+  		this.selectedDay.date = this.utils.getFollowingMonth(this.selectedDay.date);
   		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date, this.appointments);
   	}
 
   	public getPreviousMonth(): void {
-  		this.selectedDay.date = this.calendarService.getPreviousMonth(this.selectedDay.date);
+  		this.selectedDay.date = this.utils.getPreviousMonth(this.selectedDay.date);
   		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date, this.appointments);
   	}
 

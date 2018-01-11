@@ -8,6 +8,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
 // Services
 import { ServerCommunicationService } from './services/server-communication.service';
+import { UtilsService } from './services/utils.service';
 
 
 @NgModule({
@@ -18,6 +19,9 @@ import { ServerCommunicationService } from './services/server-communication.serv
   ],
   declarations: [CalendarComponent],
   exports: [CalendarComponent],
-  providers: [ServerCommunicationService]
+  providers: [
+  	ServerCommunicationService,
+  	UtilsService
+  ]
 })
 export class SharedModule { }
