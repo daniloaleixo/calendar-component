@@ -1,0 +1,50 @@
+@import 'variables';
+
+
+// 
+// Media queries mixins
+//
+
+@mixin bp-xsmall {
+  @media #{$mq-xsmall} {
+    @content;
+  }
+}
+
+@mixin bp-small {
+  @media #{$mq-small} {
+    @content;
+  }
+}
+
+@mixin bp-medium {
+  @media  #{$mq-medium} {
+    @content;
+  }
+}
+
+
+@mixin visible-xs($display-type) {
+	@media #{$mq-xsmall} { display: block; }
+  @media #{$mq-small} { display: $display-type; }
+}
+
+@mixin hidden-xs($display-type) {
+  @media #{$mq-xsmall} { display: none; }
+  @media #{$mq-small} { display: $display-type; }  
+}
+
+
+// 
+// Margin and padding mxiins
+// 
+
+@mixin padding-lateral($size) {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+@mixin margin-lateral($size) {
+  margin-left: $size;
+  margin-right: $size;
+}

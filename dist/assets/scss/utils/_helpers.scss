@@ -1,0 +1,20 @@
+
+
+// Alignment
+.align-vertical-center {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.align-horizontal-center {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.align-space-between {
+	display: flex;
+	justify-content: space-between;
+}

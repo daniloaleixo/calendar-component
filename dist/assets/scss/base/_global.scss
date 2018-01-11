@@ -1,0 +1,10 @@
+
+@import '../utils/variables';
+
+body {
+	background-color: $backgroundColor;
+}
+
+* {
+	box-sizing: border-box;
+}
