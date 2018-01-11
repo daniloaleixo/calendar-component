@@ -29,8 +29,9 @@
 						</ul>
 					</div>
 					<div class="create-event">
-						<input id="appointment-input" class="create-event__input" placeholder="Create event">
-						<div id="appointment-submit" class="create-event__plus-icon">
+						<input id="appointment-input" class="create-event__input" 
+						placeholder="Create event" [(ngModel)]="eventInput">
+						<div id="appointment-submit" class="create-event__plus-icon" (click)="addEvent(eventInput)">
 							<span>+</span>
 						</div>
 					</div>

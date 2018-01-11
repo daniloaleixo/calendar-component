@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // Components 
@@ -12,6 +13,7 @@ import { ServerCommunicationService } from './services/server-communication.serv
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     HttpModule
   ],
   declarations: [CalendarComponent],

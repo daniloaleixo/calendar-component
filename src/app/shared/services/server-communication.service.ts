@@ -32,6 +32,21 @@ export class ServerCommunicationService {
     //   .catch(this.handleError);
   }
 
+  public postRequest(url: string, body: any): Observable<any> {
+
+    // 
+    // A little workaround to "save" the appointment
+    this.appointments.push(<IAppointmentDB>body);
+
+    return Observable.of(this.appointments);
+
+    // For some reason I couldn't use the seed
+    // Used /api/appointments and nothing comes out
+    // return this.http.get(url)
+    //   .map(res => res.json())
+    //   .catch(this.handleError);
+  }
+
   private handleError (error: any) {
     // In a real world app, we might send the error to remote logging infrastructure
     // and reformat for user consumption

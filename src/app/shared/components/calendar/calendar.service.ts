@@ -42,6 +42,9 @@ export class CalendarService {
 
 
 
+    // 
+    // Helpers for the service
+    // 
    	private getDaysInMonth(month: number, year: number): Date[] {
          const date = new Date(year, month, 1);
          let days = [];
@@ -134,6 +137,10 @@ export class CalendarService {
         throw "Nao consegui pegar o mês anterior";
 
       return previousMonth;
+    }
+
+    public turnDateIntoDBDate(date: Date): string {
+      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     }
 
 

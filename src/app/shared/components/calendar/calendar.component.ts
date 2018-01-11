@@ -19,6 +19,8 @@ export class CalendarComponent implements OnInit {
 
     public loadingState: boolean = false;
 
+    public eventInput: string = '';
+
 	public daysOfTheWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 	public daysOfTheWeekFull: string[] = ['Sunday', 'Monday', 
 									'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -79,6 +81,32 @@ export class CalendarComponent implements OnInit {
 
   		this.selectedDay = this.calendarService.flattenArrayOfArrays(this.month)
   							.find((day: ICalendarDay) => daySelected.date.getTime() == day.date.getTime());
+  	}
+
+  	public addEvent(title: string): void {
+  		const appoint: IAppointment = {
+  			title: title,
+  			id: parseInt((Math.random()* 1000).toString()), //In fact it should be a UID
+  			date: this.selectedDay.date 
+
+  		};
+
+
+  		// Here I'm just handling if there's an error uploading the event
+  		// and some workaround to simulate the save on the DB
+  		this.server.postRequest(COMM_CONSTANTS.addAppointment, {
+  			...appoint,
+  			date: this.calendarService.turnDateIntoDBDate(this.selectedDay.date),
+  		})
+  		.subscribe(
+	  		(res) => {
+	  			this.selectedDay.appointments.push(appoint);
+	  			this.eventInput = ''; // Reset event input
+	  		},
+	  		(err) => {
+	  			throw "Erro ao colocar o evento";
+	  		}
+  		);
   	}
 
 

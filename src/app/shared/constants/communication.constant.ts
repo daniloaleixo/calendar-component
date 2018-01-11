@@ -1,4 +1,6 @@
 
 export const COMM_CONSTANTS = {
-	getAppointments: 'appointments' 
+	getAppointments: 'appointments',
+	addAppointment: 'appointments',
+
 }
