@@ -224,12 +224,23 @@ $defaultMatginBottom: 1.5rem;
 	
 }
 
-.bla {
-	border-radius: 100%;
+.calendar__day {
+	&--selected {
+		border-radius: 100%;
+	    background-color: $bgBoxLeft;
+	    color: white;
+	    width: 35px;
+	    height: 35px;
+	    position: absolute;
+	    transform: translate(0.33rem, -1.1rem);
+	}
+	
+}
+.has-event {
+	width: 5px;
+    height: 5px;
     background-color: $bgBoxLeft;
-    color: white;
-    width: 35px;
-    height: 35px;
+    border-radius: 100%;
     position: absolute;
-    transform: translate(0.33rem, -1.1rem);
+    transform: translate(1.3rem, -1.3rem);
 }

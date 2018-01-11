@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICalendarDay } from '../../models/calendar.model';
+import { ICalendarDay, IAppointment } from '../../models/calendar.model';
 
 // Não fiz esse componente global porque ele vai servir de helper para o componente apenas
 @Injectable()
@@ -11,17 +11,21 @@ export class CalendarService {
       return [].concat.apply([], arrays);
     }
 
-    public mountMonthInformation(today: Date): Array<ICalendarDay[]> {
+    public mountMonthInformation(today: Date, appointments: IAppointment[]): Array<ICalendarDay[]> {
       let result: Array<ICalendarDay[]> = [];
       let month: ICalendarDay[] = this.getDaysInMonth(today.getMonth(), today.getFullYear())
       .map((day: Date) => {
         return {
           date: day,
-          offset: false
+          offset: false,
+          appointments: []
         };
       });
 
+      // Add days from previous and next month that appears on calendar view
       month = this.addOffsetDays(month);
+      // Add the appointments to the correct date
+      month = this.insertAppointments(month, appointments);
 
       // Divide the days in arrays of 7 so instead of a array(31) I would have 
       // [ array(7), array (7), ...]
@@ -47,6 +51,21 @@ export class CalendarService {
          }
          return days;
   	}
+
+    private insertAppointments(month: ICalendarDay[], appointments: IAppointment[]): ICalendarDay[] {
+      appointments.map((appt: IAppointment) => {
+        debugger
+        // Push appointment to the right day
+        const dayToInsert: ICalendarDay = month
+        .find((day: ICalendarDay) => this.compareDayMonthYear(day.date, appt.date));
+
+        debugger
+
+        if(dayToInsert)
+          dayToInsert.appointments.push(appt);
+      });
+      return month;
+    }
 
   	// Vai adicionar os dias que faltam nas colunas de inicio e fim
   	private addOffsetDays(month: ICalendarDay[]): ICalendarDay[] {
@@ -115,5 +134,12 @@ export class CalendarService {
         throw "Nao consegui pegar o mês anterior";
 
       return previousMonth;
+    }
+
+
+    private compareDayMonthYear(date1: Date, date2: Date): boolean {
+      return date1.getDate() == date2.getDate() && 
+              date1.getMonth() == date2.getMonth() &&
+              date1.getFullYear() == date2.getFullYear();
     }
 }

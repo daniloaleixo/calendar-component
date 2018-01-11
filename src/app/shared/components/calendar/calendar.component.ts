@@ -17,6 +17,8 @@ import { COMM_CONSTANTS } from '../../constants/communication.constant';
 })
 export class CalendarComponent implements OnInit {
 
+    public loadingState: boolean = false;
+
 	public daysOfTheWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 	public daysOfTheWeekFull: string[] = ['Sunday', 'Monday', 
 									'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -47,9 +49,6 @@ export class CalendarComponent implements OnInit {
   			date: new Date(2017, 11, 18),
   			offset: false
   		};
-  		
-  		this.month = this.calendarService.mountMonthInformation(startDate.date);
-  		this.changeSelectedDay(startDate);
 
   		// Request from server
   		this.server.getRequest(COMM_CONSTANTS.getAppointments)
@@ -57,7 +56,13 @@ export class CalendarComponent implements OnInit {
   			// Get all the appointments for this user
   			this.appointments = res.map((appt: IAppointmentDB) => {
   				return { ...appt, date: new Date(appt.date) };
-  			})
+  			});
+
+  			// Create the month object with all the appointments 
+	  		this.month = this.calendarService.mountMonthInformation(startDate.date, this.appointments);
+	  		this.changeSelectedDay(startDate);
+	  		this.loadingState = true;
+	  		console.log(this.month);
   		});
   	}
 
@@ -87,12 +92,12 @@ export class CalendarComponent implements OnInit {
 
   	public getFollowingMonth(): void {
   		this.selectedDay.date = this.calendarService.getFollowingMonth(this.selectedDay.date);
-  		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date);
+  		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date, this.appointments);
   	}
 
   	public getPreviousMonth(): void {
   		this.selectedDay.date = this.calendarService.getPreviousMonth(this.selectedDay.date);
-  		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date);
+  		this.month = this.calendarService.mountMonthInformation(this.selectedDay.date, this.appointments);
   	}
 
 }

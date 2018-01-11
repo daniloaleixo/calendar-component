@@ -2,6 +2,7 @@
 export interface ICalendarDay {
 	date: Date;
 	offset: boolean;
+	appointments?: IAppointment[]; 
 }
 
 export interface IAppointmentDB {

@@ -2,7 +2,7 @@
 <div class="content align-vertical-center">
 	<div class="align-horizontal-center">
 		
-		<div class="calendar">
+		<div *ngIf="loadingState" class="calendar">
 
 			<!-- Event block -->
 			<div class="event row">
@@ -24,10 +24,8 @@
 					<!-- List of current events -->
 					<div class="event-list">
 						current events
-						<ul>
-							<li>Theusmá Birthday</li>
-							<li>Theusmá Birthday</li>
-							<li>Theusmá Birthday</li>
+						<ul *ngFor="let appointment of selectedDay.appointments">
+							<li>{{ appointment.title }}</li>
 						</ul>
 					</div>
 					<div class="create-event">
@@ -74,8 +72,9 @@
 							<div *ngIf="!isSelectedDay(day)">
 								{{ day.date.getDate() }}
 							</div>
+							<div *ngIf="day.appointments?.length" class="has-event"></div>
 							<!-- Selected purple ball -->
-							<div class="bla" *ngIf="isSelectedDay(day)">
+							<div class="calendar__day--selected" *ngIf="isSelectedDay(day)">
 								<span class="align-vertical-center">{{ day.date.getDate() }}</span>
 								<!-- {{ day.date.getDate() }} -->
 							</div>
