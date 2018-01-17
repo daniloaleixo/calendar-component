@@ -22,7 +22,7 @@ The calendar component was thought to be a component that is going to be used th
 
 
 
-#### Sass architecture
+### Sass architecture
 
 The architecture in CSS is following the 7-to-1 pattern and everything that is exclusive to the component are inside its own scss file (to keep it await from the global CSS).
 
