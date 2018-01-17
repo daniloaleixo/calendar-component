@@ -1,61 +1,47 @@
-# Avanade Angular Academy by Gama - Simulado #2
 
-Segundo simulado para testar suas habilidades de HTML, CSS e TypeScript do programa Avanade Angular Academy (AAA) By Gama. Neste simulado o objetivo é testar sua habilidade para desenvolver usando [Angular](https://angular.io).
 
-Finalmente vamos começar a brincar de verdade né?! Bateu um frio na barriga só de ver o nome Angular? Fica sossegado que é bem tranquilo e hoje o angular-cli, typescript e o plugin momentjs vão ser seus melhores amigos.
+# Avanade Angular Academy by Gama
 
-Agora chega de conversa e vamos codar!
-
-## Configurando ambiente no Windows, Mac e Ubuntu
-
-Visto que você já tem o node instalado e ja fez o primeiro simulado vamos apenas instalar as dependencias do projeto:
-```
-npm install
-```
-Dependências instaladas, vamos entender a estrutura inicial. Você vai encontrar alguns arquivos já criados e trabalhar a partir daí. A ideia aqui é exercitar um pouco de TDD (Test Driven Development). A primeira coisa que você precisa fazer é rodar na sua linha de comando o seguinte:
-```
-npm test
-```
-Para saber mais sobre testes de aceitação, leia sobre o framework Mocha. O primeiro teste irá passar e os demais irão falhar. Para terminar este simulado o seu objetivo é fazer todos os testes passarem.
-
-## O que vamos desenvolver?
-
-Neste simulado iremos desenvolver um calendário de eventos utilizando Angular e [Moment.js](https://momentjs.com/) - para uma manipulação mais facil de datas. O nosso calendário já possui um arquivo de seed e para utilizá-lo precisaremos consultar nossa API local para manipular os dados utilizando o plugin [In-memory Web API](https://github.com/angular/in-memory-web-api).
-
-Ta achando que é muita informação?? Fica calmo! Dê uma olhadinha nesses dois tutoriais oficiais da pagina do Angular que eles abordam o minimo necessario para você finalizar esse simulado com maestria:
-
-- [QuickStart](https://angular.io/guide/quickstart)
-- [Tutorial: Tour of Heroes](https://angular.io/tutorial)
-
-## Mas e o layout? Como fica?
-
-Ficar abrindo photoshop para pegar medidas de layout, hexadecimal de cores e tipo das fontes é chato né? Nosso super Designer preparou um style-guide para facilitar a vida de vocês!
-
-![style-guide](https://raw.githubusercontent.com/gamaacademy/gama-avanade-tryout02/master/images/readme-image-0.png)
+A contest to test Angular skills, the challenge here is to create a calendar component as shown above.
 
 ![style-guide-2](https://raw.githubusercontent.com/gamaacademy/gama-avanade-tryout02/master/images/readme-image-1.jpg)
 
-## Algumas pequenas regras!
+To access: https://daniloaleixo.github.io/calendar-component/
 
-**ATENÇÃO:** O seu calendário após carregado deve sempre ser exibido com o dia `18-12-2017` selecionado e com os respectivos eventos deste.
 
-Para passar por todos os testes alguns elementos do seu código devem ter algumas classes e ids específicos, abaixo temos a listagem:
+## System architecture
 
-- Campo de input de eventos deve ter o id `appointment-input`
-- Botão de adicionar o evento naquela data deve ter o id `appointment-submit`
-- Dias do calendário devem ter a classe `calendar__day`
-- Dias do calendário que possuem eventos devem possuir duas classes: `calendar__day` e `has-event`, sendo esta última a responsável por adicionar o indicador de evento naquela data
+The calendar component was thought to be a component that is going to be used throughout the code, so it's located inside Shared modules (that is a module that will be imported in all modules of the system, holding models, constants, etc).
 
-Para rodar os testes execute:
+/shared
+&nbsp;&nbsp;/components
+&nbsp;&nbsp;&nbsp;&nbsp;/calendar-component
 
-```
-npm test
-```
+#### Sass architecture
 
-## Dúvidas?
+The architecture in CSS is following the 7-to-1 pattern and everything that is exclusive to the component are inside its own scss file (to keep it await from the global CSS).
 
-Ta confuso com alguma coisa? Achou as instruções muito superficiais? Abre um issue pra gente que respondemos rapidinho!
+**Component CSS**&#13;
+With its exclusive classes (which are not visible to the rest of the code)&#13;
+&#13;
+/shared&#13;
+&nbsp;&nbsp;/components&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/calendar-component&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/calendar-component.scss&#13;
+&#13;
+&#13;
+**Global CSS**&#13;
+Everything that will be used throught the code&#13;
+&#13;
+/assets&#13;
+&nbsp;&nbsp;/scss&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/base&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/components&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/layout&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/themes&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/utils&#13;
+&nbsp;&nbsp;&nbsp;&nbsp;/vendors&#13;
 
-[Abrir um issue](https://github.com/gamaacademy/gama-avanade-tryout02/issues)
 
-Prefere falar no privado? Só enviar um email para `matheus+avanade@gama.academy`
+## Original Contest repo
+https://github.com/gamaacademy/gama-avanade-tryout02
